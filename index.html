@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golden Orchard | Fresh Online Mango Market</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #fffdf5; color: #333; line-height: 1.6; }
+
+    /* Header & Navbar */
+    header {
+      background: linear-gradient(135deg, #ff9800, #ffb300);
+      color: #fff;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    header h1 { font-size: 1.5rem; letter-spacing: 0.5px; }
+    .cart-badge {
+      background: #2e7d32;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Hero Banner */
+    .hero {
+      text-align: center;
+      padding: 3.5rem 1.5rem;
+      background: #fff3cd;
+      border-bottom: 2px solid #ffe082;
+    }
+    .hero h2 { font-size: 2.2rem; color: #e65100; margin-bottom: 0.5rem; }
+    .hero p { font-size: 1.1rem; color: #5d4037; max-width: 600px; margin: 0 auto 1.5rem; }
+    .btn-primary {
+      background: #2e7d32;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: #1b5e20; }
+
+    /* Product Grid */
+    .container { max-width: 1100px; margin: 2.5rem auto; padding: 0 1.5rem; }
+    .section-title { text-align: center; font-size: 1.8rem; color: #e65100; margin-bottom: 2rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #ffe082;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .mango-icon { font-size: 4rem; margin-bottom: 0.75rem; }
+    .card h3 { color: #333; margin-bottom: 0.3rem; }
+    .origin { font-size: 0.85rem; color: #757575; margin-bottom: 0.75rem; }
+    .price { font-size: 1.25rem; font-weight: bold; color: #2e7d32; margin-bottom: 1rem; }
+    .btn-add {
+      background: #ff9800;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+    }
+    .btn-add:hover { background: #f57c00; }
+
+    /* Cart Summary Box */
+    .cart-section {
+      background: #fff;
+      border: 2px solid #ffb300;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 3rem;
+    }
+    .cart-items { list-style: none; margin: 1rem 0; }
+    .cart-items li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    .total-row { font-size: 1.25rem; font-weight: bold; text-align: right; margin-top: 1rem; color: #2e7d32; }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #333;
+      color: #fff;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🥭 Golden Orchard</h1>
+    <div class="cart-badge" onclick="document.getElementById('cart').scrollIntoView({behavior: 'smooth'})">
+      Cart: <span id="cart-count">0</span> items (₹<span id="header-total">0</span>)
+    </div>
+  </header>
+
+  <section class="hero">
+    <h2>Farm-Fresh Mangoes Delivered to Your Doorstep</h2>
+    <p>100% Carbide-free, naturally ripened seasonal mangoes handpicked directly from organic orchards.</p>
+    <a href="#varieties" class="btn-primary">Shop Fresh Mangoes</a>
+  </section>
+
+  <main class="container" id="varieties">
+    <h2 class="section-title">Seasonal Mango Varieties</h2>
+
+    <div class="grid">
+      <div class="card">
+        <div class="mango-icon">🥭</div>
+        <h3>Ratnagiri Alphonso (Hapus)</h3>
+        <p class="origin">Origin: Maharashtra • Box of 1 Dozen</p>
+        <p class="price">₹1,200</p>
+        <button class="btn-add" onclick="addToCart('Ratnagiri Alphonso (1 Dozen)', 1200)">Add to Cart</button>
+      </div>
+
+      <div class="card">
+        <div class="mango-icon">🥭</div>
+        <h3>Banganapalli</h3>
+        <p class="origin">Origin: Andhra Pradesh • 3 Kg Box</p>
+        <p class="price">₹550</p>
+        <button class="btn-add" onclick="addToCart('Banganapalli (3 Kg)', 550)">Add to Cart</button>
+      </div>
+
+      <div class="card">
+        <div class="mango-icon">🥭</div>
+        <h3>Gir Kesar</h3>
+        <p class="origin">Origin: Gujarat • 3 Kg Box</p>
+        <p class="price">₹750</p>
+        <button class="btn-add" onclick="addToCart('Gir Kesar (3 Kg)', 750)">Add to Cart</button>
+      </div>
+
+      <div class="card">
+        <div class="mango-icon">🥭</div>
+        <h3>Organic Mallika</h3>
+        <p class="origin">Origin: Karnataka • 3 Kg Box</p>
+        <p class="price">₹600</p>
+        <button class="btn-add" onclick="addToCart('Organic Mallika (3 Kg)', 600)">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Shopping Cart Summary -->
+    <section class="cart-section" id="cart">
+      <h3>🛒 Your Order Summary</h3>
+      <ul class="cart-items" id="cart-list">
+        <li>Your cart is empty. Add some delicious mangoes above!</li>
+      </ul>
+      <div class="total-row">Total: ₹<span id="cart-total">0</span></div>
+      <div style="text-align: right; margin-top: 1rem;">
+        <button class="btn-primary" onclick="checkout()">Place Order</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Golden Orchard Online Mango Market • Deployed via GitHub Actions CI/CD</p>
+  </footer>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const list = document.getElementById('cart-list');
+      const countEl = document.getElementById('cart-count');
+      const headerTotalEl = document.getElementById('header-total');
+      const cartTotalEl = document.getElementById('cart-total');
+
+      list.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        total += item.price;
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${item.name}</span><span>₹${item.price} <button onclick="removeItem(${index})" style="margin-left:8px; color:red; border:none; background:none; cursor:pointer;">✕</button></span>`;
+        list.appendChild(li);
+      });
+
+      if (cart.length === 0) {
+        list.innerHTML = '<li>Your cart is empty. Add some delicious mangoes above!</li>';
+      }
+
+      countEl.textContent = cart.length;
+      headerTotalEl.textContent = total;
+      cartTotalEl.textContent = total;
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Please add at least one mango box to your cart first!');
+        return;
+      }
+      alert('Thank you for your order! Your fresh mangoes will be dispatched soon.');
+      cart = [];
+      updateCartUI();
+    }
+  </script>
+
+</body>
+</html>
