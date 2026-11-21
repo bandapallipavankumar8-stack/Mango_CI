@@ -1,12 +1,19 @@
-name: Security & Dependency Scan
+name: Scan and Deploy Mango Market
 
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+
+# Required permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
+  # ==========================================
+  # STAGE 1: Security & Dependency Scan
+  # ==========================================
   security-scan:
     runs-on: ubuntu-latest
     steps:
@@ -22,3 +29,26 @@ jobs:
           format: 'table'
           exit-code: '1'
           severity: 'CRITICAL,HIGH'
+
+  # ==========================================
+  # STAGE 2: Deploy to GitHub Pages
+  # Runs ONLY if 'security-scan' passes!
+  # ==========================================
+  deploy:
+    needs: security-scan
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
