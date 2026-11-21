@@ -10,9 +10,6 @@ permissions:
   id-token: write
 
 jobs:
-  # ==========================================
-  # STAGE 1: Security & Dependency Scan
-  # ==========================================
   security-scan:
     runs-on: ubuntu-latest
     steps:
@@ -29,9 +26,6 @@ jobs:
           exit-code: '1'
           severity: 'CRITICAL,HIGH'
 
-  # ==========================================
-  # STAGE 2: Auto-Enable & Deploy to GitHub Pages
-  # ==========================================
   deploy:
     needs: security-scan
     runs-on: ubuntu-latest
@@ -42,10 +36,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup & Auto-Enable GitHub Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
