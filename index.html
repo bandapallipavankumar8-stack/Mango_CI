@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Golden Orchard | Fresh Online Mango Market</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -103,6 +103,7 @@
       border-bottom: 1px solid #eee;
     }
     .total-row { font-size: 1.25rem; font-weight: bold; text-align: right; margin-top: 1rem; color: #2e7d32; }
+    .checkout-actions { text-align: right; margin-top: 1rem; }
 
     footer {
       text-align: center;
@@ -138,7 +139,7 @@
         <h3>Ratnagiri Alphonso (Hapus)</h3>
         <p class="origin">Origin: Maharashtra • Box of 1 Dozen</p>
         <p class="price">₹1,200</p>
-        <button class="btn-add" onclick="addToCart('Ratnagiri Alphonso (1 Dozen)', 1200)">Add to Cart</button>
+        <button type="button" class="btn-add" onclick="addToCart('Ratnagiri Alphonso (1 Dozen)', 1200)">Add to Cart</button>
       </div>
 
       <div class="card">
@@ -146,7 +147,7 @@
         <h3>Banganapalli</h3>
         <p class="origin">Origin: Andhra Pradesh • 3 Kg Box</p>
         <p class="price">₹550</p>
-        <button class="btn-add" onclick="addToCart('Banganapalli (3 Kg)', 550)">Add to Cart</button>
+        <button type="button" class="btn-add" onclick="addToCart('Banganapalli (3 Kg)', 550)">Add to Cart</button>
       </div>
 
       <div class="card">
@@ -154,7 +155,7 @@
         <h3>Gir Kesar</h3>
         <p class="origin">Origin: Gujarat • 3 Kg Box</p>
         <p class="price">₹750</p>
-        <button class="btn-add" onclick="addToCart('Gir Kesar (3 Kg)', 750)">Add to Cart</button>
+        <button type="button" class="btn-add" onclick="addToCart('Gir Kesar (3 Kg)', 750)">Add to Cart</button>
       </div>
 
       <div class="card">
@@ -162,7 +163,7 @@
         <h3>Organic Mallika</h3>
         <p class="origin">Origin: Karnataka • 3 Kg Box</p>
         <p class="price">₹600</p>
-        <button class="btn-add" onclick="addToCart('Organic Mallika (3 Kg)', 600)">Add to Cart</button>
+        <button type="button" class="btn-add" onclick="addToCart('Organic Mallika (3 Kg)', 600)">Add to Cart</button>
       </div>
     </div>
 
@@ -173,8 +174,8 @@
         <li>Your cart is empty. Add some delicious mangoes above!</li>
       </ul>
       <div class="total-row">Total: ₹<span id="cart-total">0</span></div>
-      <div style="text-align: right; margin-top: 1rem;">
-        <button class="btn-primary" onclick="checkout()">Place Order</button>
+      <div class="checkout-actions">
+        <button type="button" class="btn-primary" onclick="checkout()">Place Order</button>
       </div>
     </section>
   </main>
@@ -203,7 +204,7 @@
       cart.forEach((item, index) => {
         total += item.price;
         const li = document.createElement('li');
-        li.innerHTML = `<span>${item.name}</span><span>₹${item.price} <button onclick="removeItem(${index})" style="margin-left:8px; color:red; border:none; background:none; cursor:pointer;">✕</button></span>`;
+        li.innerHTML = `<span>${item.name}</span><span>₹${item.price} <button type="button" onclick="removeItem(${index})" style="margin-left:8px; color:red; border:none; background:none; cursor:pointer;">✕</button></span>`;
         list.appendChild(li);
       });
 
