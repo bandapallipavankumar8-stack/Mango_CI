@@ -1,1 +1,33 @@
+name: Test Mango Market HTML
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-html:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js for HTML Validator
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run HTML Validation Tests on index.html
+        run: npx html-validate index.html
+
+      - name: Scan repository for vulnerabilities & secrets
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          scanners: 'vuln,secret'
+          format: 'table'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
 
