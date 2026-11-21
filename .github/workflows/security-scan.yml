@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
 
-# Required permissions for GitHub Pages deployment
+# Required permissions to auto-enable Pages and deploy
 permissions:
   contents: read
   pages: write
@@ -31,8 +31,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
   # ==========================================
-  # STAGE 2: Deploy to GitHub Pages
-  # Runs ONLY if 'security-scan' passes!
+  # STAGE 2: Auto-Enable & Deploy to GitHub Pages
   # ==========================================
   deploy:
     needs: security-scan
@@ -49,8 +48,8 @@ jobs:
         with:
           path: '.'
 
-      -   - name: Deploy to GitHub Pages
-     id: deployment
-     uses: actions/deploy-pages@v4
-     with:
-       enablement: true
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          enablement: true
