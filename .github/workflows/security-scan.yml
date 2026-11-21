@@ -10,9 +10,6 @@ permissions:
   id-token: write
 
 jobs:
-  # ==========================================
-  # STAGE 1: Security & Dependency Scan
-  # ==========================================
   security-scan:
     runs-on: ubuntu-latest
     steps:
@@ -29,9 +26,6 @@ jobs:
           exit-code: '1'
           severity: 'CRITICAL,HIGH'
 
-  # ==========================================
-  # STAGE 2: Deploy to GitHub Pages
-  # ==========================================
   deploy:
     needs: security-scan
     runs-on: ubuntu-latest
